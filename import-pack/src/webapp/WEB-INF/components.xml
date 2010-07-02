@@ -14,6 +14,12 @@
 			singleton="false">
 	</bean>
 	
+	
+    <bean id="org.sakaiproject.importer.api.ImportFileParser-ContentPackaging"
+			class="org.sakaiproject.importer.impl.ContentPackagingFileParser"
+			singleton="false">
+	</bean>
+	
 	<!-- <bean id="org.sakaiproject.importer.api.ImportFileParser-Bb6" -->
 	<!-- 		class="org.sakaiproject.importer.impl.Blackboard6FileParser" -->
 	<!-- 		singleton="false"> -->
@@ -55,6 +61,7 @@
 			<list>
 				<ref bean="org.sakaiproject.importer.api.ImportFileParser-Sakai"/>
 				<ref bean="org.sakaiproject.importer.api.ImportFileParser-CommonCartridge"/>
+				<ref bean="org.sakaiproject.importer.api.ImportFileParser-ContentPackaging"/>
 				<!-- <ref bean="org.sakaiproject.importer.api.ImportFileParser-Bb6"/> -->
 			</list>
 		</property>

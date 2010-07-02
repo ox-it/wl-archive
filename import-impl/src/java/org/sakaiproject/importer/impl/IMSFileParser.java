@@ -64,7 +64,9 @@ public abstract class IMSFileParser extends ZipFileParser {
 	    InputStream fis = null;
         try {
             fis = new FileInputStream(absolutepathToManifest);
-            DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder docBuilder = factory.newDocumentBuilder();
             this.archiveManifest = (Document) docBuilder.parse(fis);
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -293,6 +295,10 @@ public abstract class IMSFileParser extends ZipFileParser {
 
 		public String getDependency(Node node) {
 			return XPathHelper.getNodeValue("./dependency/@identifierref", node);
+		}
+
+		public String getHref(Node resourceNode) {
+			return XPathHelper.getNodeValue("./@href", resourceNode);
 		}
 	}
 	
