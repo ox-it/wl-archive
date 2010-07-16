@@ -57,7 +57,6 @@ public class ContentPackagingFileParser extends IMSFileParser {
 		return new ContentPackagingFileParser();
 	}
 
-	//TODO: is this method really necessary/used anywhere?
 	protected Collection getCategoriesFromArchive(String pathToData) {
 		Collection categories = new ArrayList();
 		ImportMetadata im;
@@ -233,6 +232,16 @@ public class ContentPackagingFileParser extends IMSFileParser {
 	protected class CPManifestHelper extends ManifestHelper {
 
 		public List getTopLevelItemNodes(Document manifest) {
+			// Gets top level 'item' elements. If there's only one item at the top level
+			// it's probably a container for the main items below, so look one level down:
+			
+			List items = XPathHelper.selectNodes("//organization/item", manifest);
+			if (items != null && items.size() > 1) return items;
+
+			items = XPathHelper.selectNodes("//organization/item/item", manifest);
+			
+			if (items != null && items.size() > 1) return items;
+			
 			return XPathHelper.selectNodes("//organization/item", manifest);
 		}
 		
