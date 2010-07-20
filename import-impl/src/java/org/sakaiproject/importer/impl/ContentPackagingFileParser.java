@@ -199,9 +199,9 @@ public class ContentPackagingFileParser extends IMSFileParser {
 			String descrip = "";
 			Node itemNode = XPathHelper.selectNode("//item[@identifierref='" + this.getId(resourceNode) + "']", resourceNode.getOwnerDocument());
 			if (itemNode != null)
-				descrip = XPathHelper.getNodeValue(".//imsmd:description/imsmd:langstring", itemNode);
+				descrip = XPathHelper.getNodeValue("./imsmd:lom/imsmd:general/imsmd:description/imsmd:langstring", itemNode);
 			if (descrip.equals(""))
-				descrip = XPathHelper.getNodeValue(".//imsmd:description/imsmd:langstring", resourceNode);
+				descrip = XPathHelper.getNodeValue("./imsmd:lom/imsmd:general/imsmd:description/imsmd:langstring", resourceNode);
 			
 			return descrip;
 		}
@@ -224,7 +224,7 @@ public class ContentPackagingFileParser extends IMSFileParser {
 		}
 
 		public String getDescription(Node itemNode) {
-			return XPathHelper.getNodeValue(".//imsmd:description/imsmd:langstring", itemNode);
+			return XPathHelper.getNodeValue("./imsmd:lom/imsmd:general/imsmd:description/imsmd:langstring", itemNode);
 		}
 		
 	}
