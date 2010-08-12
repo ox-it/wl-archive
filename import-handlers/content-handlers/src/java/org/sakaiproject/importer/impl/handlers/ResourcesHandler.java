@@ -112,27 +112,27 @@ public class ResourcesHandler implements HandlesImportable {
 				resourceProps.put(ResourceProperties.PROP_DESCRIPTION, description);
 				resourceProps.put(ResourceProperties.PROP_CONTENT_PRIORITY, Integer.toString(((FileResource)thing).getSequenceNum()));
 
-				
-				if (title.endsWith(".zip")) {
-					
-					//create a folder with the name of the zip, minus the .zip
-					String container = title.substring(0, title.length() - 4);
-					resourceProps.put(ResourceProperties.PROP_DISPLAY_NAME, container);
-
-					//get the full path to the current folder
-					String path = id.substring(0, id.length() - title.length());
-
-					addContentCollection(path + container, resourceProps);
-		  			addAllResources(contents, path + container, notifyOption);
-						
-				}
-				else {
+				// Commented out section which automatically unpack zip archives:
+//				if (title.endsWith(".zip")) {
+//					
+//					//create a folder with the name of the zip, minus the .zip
+//					String container = title.substring(0, title.length() - 4);
+//					resourceProps.put(ResourceProperties.PROP_DISPLAY_NAME, container);
+//
+//					//get the full path to the current folder
+//					String path = id.substring(0, id.length() - title.length());
+//
+//					addContentCollection(path + container, resourceProps);
+//		  			addAllResources(contents, path + container, notifyOption);
+//						
+//				}
+//				else {
 					if(m_log.isDebugEnabled()) {
 						m_log.debug("import ResourcesHandler about to add file entitled '" + title + "'");
 					}
 					resourceProps.put(ResourceProperties.PROP_DISPLAY_NAME, title);
 					addContentResource(id, contentType, contents, resourceProps, notifyOption);
-				}				
+//				}				
 	  			
 			} else if ("sakai-web-link".equals(thing.getTypeName())) {
 				title = ((WebLink)thing).getTitle();
